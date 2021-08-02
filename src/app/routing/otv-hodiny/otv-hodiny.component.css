@@ -1,0 +1,116 @@
+
+.main_cont {    
+    position: absolute;    
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;    
+    z-index: -3;   
+    
+}
+.background_cont {
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 60vh;        
+    background-repeat: no-repeat;
+    background-image: url("/assets/open.jpg");
+    background-size: cover;    
+         
+    animation: breath 60s linear infinite;    
+    animation-delay: 2s;  
+}
+.schedule_cont {
+    color: rgba(255, 255, 255, 0.863);
+    border-radius: 0.6rem;
+    border: 3px solid white;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.452);
+    width: fit-content; 
+    height: fit-content;  
+    position: absolute; 
+    top: 19%;
+    left: -90%;
+    transition: 0.5s;    
+}
+.res_button{
+text-decoration: none;
+transition: 0.4s;
+border: 1px solid rgba(128, 128, 128, 0.521);
+}
+.res_button:hover {
+    color: orangered;
+    background-color: rgba(128, 128, 128, 0.062);
+    border: 1px solid rgba(128, 128, 128, 1);
+}
+.schedule_el{
+    display: block;
+}
+.schedule_cont:hover {
+    color: rgba(255, 255, 255, 1);    
+
+    background-color: rgba(0, 0, 0, 0.552);
+}
+.schedule_cont h1 {
+    text-align: center;
+    font-size: 2rem;
+}
+.schedule_cont p {
+    text-align: left;
+    
+
+}
+.schedule_cont small {
+    text-align: right;
+}
+.text_higlight {
+    font-size: 1.2rem;
+}
+
+.logo_cont{
+    left: 0;
+    right: 0;        
+    position: absolute;    
+    height: fit-content;
+    margin-left: auto;
+    margin-right:auto;   
+    bottom: 2%;  
+    width: fit-content;    
+    text-align: center;
+    padding-bottom: 1rem;     
+    border-bottom: 0.15rem solid rgba(255, 68, 0, 0.705); 
+    transition: 0.3s; 
+}
+.mini_alert{
+    
+    position: absolute;
+    width: 80%;
+}
+
+.logo_name{
+    font-size: 3.6rem;
+    font-weight: 900;
+    font-family: Dancing script;
+    color: black;
+}
+.logo_img {    
+    margin-right: auto;
+    margin-left: auto;
+}
+.logo_subtext {
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: black;
+}
+.logo_part {
+    display: block;
+}
+
+@keyframes breath {
+    0%   { background-size: 100% auto; }
+    50% { background-size: 110% auto; }
+    100% { background-size: 100% auto; }
+  }
+
+
+
+

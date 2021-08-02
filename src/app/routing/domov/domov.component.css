@@ -1,0 +1,24 @@
+.ng_container{    
+   width: 100%;
+   height: 100vh;  
+   position: fixed;   
+   background-position: center; 
+   background-size: cover;
+}
+.slides_wrapper {  
+  position: fixed;
+  z-index: -1;  
+  height: 100vh !important; 
+    
+}
+.test {
+  border: 3px solid red;
+  width: 100%;
+}
+
+
+
+
+
+
+

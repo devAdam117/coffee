@@ -1,0 +1,222 @@
+
+<div (window:resize)="onResize($event)" class="comp_cont">
+  
+  <div [style.width]="onResizeImgWidth +'%'" [style.background-position-x]="imgPosOnResize+'%'"  class="background_img">
+    <div [style.width]="onResizeButtonWidth+'%'" class="center">
+      <button [style.line-height]="buttonLineHeight+'rem'"  [style.font-size]="buttonFontSize+'rem'" [ngClass]="{'d-none' : showForm}" (click)="showEl()" class="reserve_button" >Bookni si miesto!</button>
+    </div>
+  </div>
+ 
+  <form class="form" [formGroup]="reservationForm" >  
+    <mat-vertical-stepper   #stepper   [ngClass]=" (!showForm || finishForm)? 'd-none':'d-block'" [style.top]="formFromTop+'%'" [linear]=true class="d-none offset-xl-4 col-xl-4 offset-lg-3 col-lg-6 offset-md-3 col-md-6 col-sm-12 col-xm-12 main_form">
+      <ng-template matStepperIcon="home">
+        <mat-icon>home</mat-icon>
+    </ng-template>            
+        <mat-step label="Meno" state="home" >
+            <p>Napíšte meno, na koho bude rezervácia písaná.</p>
+             
+              <mat-form-field appearance="fill">
+                <mat-label>Meno</mat-label>
+                <input #nameInput   matInput placeholder="Petrík" formControlName="name"  >
+              </mat-form-field>
+              <div>
+                <button class="form_button" mat-button matStepperNext #next1  >Ďalej</button>
+              </div>            
+          </mat-step>
+          <mat-step  label="Email">            
+            <p>Teraz potrebujeme emailovu adresu, kde ťa budeme kontaktovať s kódom na potvrdenie rezervácie, v prípade dostupnosti daný termín</p>
+              <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input #mailInput required matInput formControlName="email" placeholder="petrik2247@gmail.com">
+              </mat-form-field>
+              <div class="text-danger" *ngIf="email?.touched ||  (email?.invalid  && checkMail)">                
+                  <ng-container
+                  *ngIf="email?.errors?.required; then emptyDOM; else validate">
+                </ng-container>
+                <ng-template #emptyDOM>
+                  <div>
+                    * Bez mailu to nepôjde :P
+                  </div>
+                </ng-template>
+                <ng-template #validate>
+                  <div  *ngIf ="email?.errors?.emailError">
+                    * Neplatný email
+                  </div>
+                </ng-template>                          
+              </div>
+              <div>
+                <button class="form_button" mat-button matStepperPrevious>Späť</button>
+                <button [disabled]="checkMail==true && (email?.errors) " (mouseenter)="valideMail()" class="form_button" mat-button matStepperNext>Ďalej</button>
+              </div>
+            
+          </mat-step>
+          <mat-step  label="Dátum">  
+              <p>Na aký deň by si chcel urobiť rezerváciu?</p>
+            <mat-form-field  appearance="fill">
+                <mat-label>Vyberte dátum</mat-label>
+                <input #dateInput matInput [matDatepicker]="picker1" formControlName="date" placeholder="7/21/2021">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>               
+              </mat-form-field>
+             
+              <div class="text-danger" *ngIf="date?.touched ||  (date?.invalid  && checkDate)">
+                
+                <ng-container
+                *ngIf="date?.errors?.required; then emptyDOM; else validate">
+              </ng-container>
+
+              <ng-template #emptyDOM>
+                <div>
+                  * Potrebujeme vedieť dátum tvojho príchodu.
+                </div>
+              </ng-template>
+              <ng-template #validate>
+                <div  *ngIf ="date?.errors?.dateError">
+                  * Neplatný formát dátumu, zvoľ si prosím z ponuky kalendára (iba dátum, ktorý ešte nenastal), avšak nie ďalej ako polroka dopredu.
+                </div>
+              </ng-template>
+                        
+            </div>
+              <div>
+                <button class="form_button" mat-button matStepperPrevious>Späť</button>
+                <button [disabled]="checkDate==true && (date?.errors) " (mouseenter)="valideDate()" class="form_button" mat-button matStepperNext>Ďalej</button>
+              </div>
+        </mat-step>
+        <mat-step label="Čas">
+            <p>A v aký čas?</p>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Vyberte čas*</mat-label>
+                <input #timeInput type="text"
+                       placeholder="Vyberte si z ponuky"
+                       aria-label="čas"
+                       matInput                       
+                       [matAutocomplete]="auto"
+                       formControlName="time">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let time of times" [value]="time">
+                    {{time}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              
+              <div>
+                <div  *ngIf="time?.touched ||  (time?.invalid  && checkTime)">
+                <ng-container
+                *ngIf="time?.errors?.required; then emptyDOM; else validate">
+              </ng-container>
+
+              <ng-template #emptyDOM>
+                <div class="text-danger">
+                  * Čas je povinný údaj!
+                </div>
+              </ng-template>
+              <ng-template #validate>
+                <div class="text-danger" *ngIf="time?.errors?.timeError">
+                  * Zvoľ si prosím iba z ponúkaných časov
+                </div>
+              </ng-template>
+            </div>
+                <button class="form_button" mat-button matStepperPrevious>Späť</button>
+                <button [disabled]="checkTime==true && (time?.errors) " (mouseenter)="valideTime()" class="form_button" mat-button matStepperNext>Ďalej</button>
+              </div>
+        </mat-step>
+        <mat-step label="Veľkosť stola">
+            <p>Už potrebujeme iba približnú veľkosť partie, s ktorou sa chystáš prísť, aby sme vám prišili stôl na mieru a to bude všetko :)</p>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Počet</mat-label>
+                <input #peopleInput type="text"
+                       placeholder="Vyberte si z ponuky"
+                       aria-label="Počet ľudí"
+                       matInput                       
+                       [matAutocomplete]="auto2"
+                       formControlName="numOfPeople">
+                <mat-autocomplete #auto2="matAutocomplete">
+                  <mat-option *ngFor="let size of sizes" [value]="size">
+                    {{size}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <div class="text-danger" *ngIf="numOfPeople?.touched ||  (numOfPeople?.invalid  && checkNumOfPeople)">
+                
+                <ng-container
+                *ngIf="numOfPeople?.errors?.required; then emptyDOM; else validate">
+              </ng-container>
+
+              <ng-template #emptyDOM>
+                <div>
+                  * Počet je povinný údaj!
+                </div>
+              </ng-template>
+              <ng-template #validate>
+                <div  *ngIf ="numOfPeople?.errors?.totalNumError">
+                  * Vyber si prosím z ponuky
+                </div>
+              </ng-template>
+                        
+            </div>
+              <div>
+                <button class="form_button" mat-button matStepperPrevious>Späť</button>
+                <button [disabled]="checkNumOfPeople==true && (numOfPeople?.errors) " (mouseenter)="validePeopleNum()" class="form_button" mat-button matStepperNext>Ďalej</button>
+              </div>
+        </mat-step>
+
+          <mat-step>
+            <ng-template matStepLabel>Odoslať</ng-template>
+            <p>Všetko je pripravené, odošli svoj formulár a my ťa v priebehu pár minút budeme kontaktovať o dostupnosti tvojej rezervácie.</p>
+            <div>
+              <button class="form_button" mat-button matStepperPrevious>Späť</button>
+              <button [disabled]=!reservationForm.valid class="form_button" [ngClass]="{'text-success':reservationForm.valid}" type="submit" mat-button (click)="onSubmit(this.reservationForm.value)" (click)="hideEl()" (click)="randomSlot()" >Odoslať</button>
+              <button class="form_button" mat-button (click)="reservationForm.reset()" (click)="stepper.reset()"   >Začať znova</button>
+            </div>          
+          </mat-step>       
+    </mat-vertical-stepper>
+  </form> 
+
+  <form *ngIf="(confirmationWindow && emptySlot)" class="confirmation_container ">
+    <div   [style.width]="finalCompWidthOnResize+'%'" [style.height]="finalCompHeightOnResize+'vh'" class=" row inner_container">
+      <div class="inner_container_comp offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 mt-4 offset-md-1 col-md-10 col-sm-12 col-xm-12">
+        <p  *ngIf="(!successMessage && !errorMessage)" class="text-success   " [style.font-size]="successFontSizeOnResize+'rem'">Našli sme pre teba a tvoju partiu miesto, s  tvojím požadovaným termínom.Teraz už iba potrebujeme potvrdenie
+          tvojho príchodu tak, že zadaš kód, ktorý by ti mal prísť každú chvíľu na email!
+        </p>
+        <div [style.font-size]="successFontSizeOnResize+'rem'" *ngIf="successMessage==true" [style.transform]="statusTranslationY" class="transition" >
+          <p class="text-success status_showing_text">Rezervácia je hotová!</p>
+          <p class="final_res_info">Meno: <small > {{reservationForm.get("name").value}} </small></p>
+          <p class="final_res_info">Email:<small > {{email.value}} </small></p>
+          <p class="final_res_info">Dátum:<small > {{showFormatedDate()}} </small></p>
+          <p class="final_res_info">Čas: <small >{{time.value}} </small></p>
+          <p class="final_res_info">Počet hostí: <small >{{numOfPeople.value}} </small></p>
+          <p >Tešíme sa na vás!! :)</p>
+        </div>
+        <p [style.font-size]="successFontSizeOnResize+'rem'" *ngIf="errorMessage==true" [style.transform]="statusTranslationY" class="text-danger status_showing_text">Neplatný kód </p>
+      </div>
+      <div *ngIf="!successMessage"  class="row  inner_container_comp offset-xl-4 col-xl-4 offset-lg-2 col-lg-8 offset-md-1 col-md-10 col-sm-12 col-xm-12" >
+      
+          <mat-form-field class="example-full-width offset-1 col-11  " appearance="fill">
+            <mat-label>Kód</mat-label>    
+            <input class="confirm_input" #codeInput
+                  aria-label="Kód"
+                  matInput>
+              
+        </mat-form-field>
+        <button  class="sbm_btn  col-6    " (click)="checkCode(this.codeInput)"  mat-button >Overiť</button>
+
+      </div>  
+    </div>
+
+</form>
+
+  <form *ngIf="(confirmationWindow && !emptySlot)  " class="confirmation_container ">
+    <div   [style.width]="finalCompWidthOnResize+'%'" [style.height]="finalCompHeightOnResize+'vh'" class=" row inner_container">
+      <div class="inner_container_comp offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 mt-4 offset-md-1 col-md-10 col-sm-12 col-xm-12">
+    <p  class="text-danger   " [style.font-size]="successFontSizeOnResize+'rem'">Bohužial  daný termín je už  zabookovaný  :/
+    </p>
+    
+  <button class="sbm_btn  col-6    "(click)="showEl_two()" mat-button >Upraviť rezerváciu</button>
+
+  </div>
+
+  </div>
+
+  </form>
+</div>
+

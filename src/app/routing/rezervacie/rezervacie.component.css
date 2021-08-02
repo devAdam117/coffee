@@ -1,0 +1,150 @@
+h2 {
+    color: black;
+}
+.background_img{
+    width: 100%;
+    height: 100vh;
+    background-image: url("/assets/reservation.jpg"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+    animation: breath 20s linear infinite;   
+    animation-delay: 2s; 
+   
+       
+
+
+}
+.final_res_info{
+    margin-left: 4%;
+    text-align: left;
+}
+.status_showing_text{   
+    
+    font-size: 2.0rem !important;
+    transition: 0.3s ease-in;
+    }
+    .transition {
+        transition: 0.3s ease-in;
+    }
+
+
+form {
+    position: absolute;
+    width: 100%;
+    top:22%;
+    height: 0vh;
+       
+    
+}
+/*Takto selectneme co chceme*/
+
+
+.main_form {
+    top: -200vh;    
+    transition: 0.3s ease-in;
+    border-radius: 1rem;   
+    background-color: rgba(4, 4, 5, 0.8);
+    border: 2px solid black;
+   
+}
+.form_button{
+    
+}
+.confirmation_container{
+   width: 100%;  
+   height: fit-content;   
+   top: 20vh;
+   text-align: center;
+   display: flex;   
+   justify-content: center;  
+   justify-items: center;  
+   
+   
+   
+  
+}
+.inner_container{ 
+    border-radius: 0.3rem;   
+    background: rgba(10, 10, 10, 0.664);
+    padding-top: 1rem;  
+}
+.inner_container_comp{
+       padding:0;
+       height: fit-content;
+    
+    
+}
+
+
+.sbm_btn{
+    border: 2px solid grey;
+    margin-left: auto;
+    margin-right: auto;
+}
+.finish_comp{    
+    display: none;
+}
+.confi_comp{
+    display: block;
+   
+}
+
+.center{
+ display: flex;
+ width: 100%;
+ height: 100%;
+ justify-content: center;
+ align-items: center;
+}
+.reserve_button {      
+    font-family: Marcellus;        
+    border-radius: 0.28rem;
+    background-color: transparent;
+    font-size: 2.5rem;
+    padding: 1.2rem;
+    color: black;    
+    border:3px solid black ;
+   
+    
+    transition: 0.3s;
+  
+
+    outline:none
+}
+.reserve_button:hover {    
+    background-color: rgba(128, 128, 128, 0.500);
+    
+}
+.reserve_button:active {    
+    background-color: rgba(128, 128, 128, 0.6);
+    
+    
+}
+.comp_cont{
+position: absolute;
+width: 100%;
+height: 100vh;
+overflow-x: hidden;
+z-index: -5;
+
+}
+.confirm_input {
+    width: 100%;
+}
+
+.fullOpacity {
+    
+}
+
+.mat-step {
+    background-color: red !important;
+}
+
+@keyframes breath {
+    0%   { background-size: 100% auto; }
+    50% { background-size: 110% auto; }
+    100% { background-size: 100% auto; }
+  }
+

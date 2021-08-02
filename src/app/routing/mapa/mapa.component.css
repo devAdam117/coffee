@@ -1,0 +1,8 @@
+.comp_cont{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: -5;
+    color: black;
+    
+    }

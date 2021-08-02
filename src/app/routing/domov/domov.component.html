@@ -1,0 +1,32 @@
+
+<!--<div [ngStyle]="{ 'background-image': 'url(' + currentImg + ')'}" class="ng_container">
+   
+   <h2>{{text}}</h2> 
+</div>
+<div id="container">
+   <div ng2-carouselamos clas="slides-wrapper">
+
+   </div>
+   
+</div>-->
+<carousel class="slides_wrapper" [images]="images"
+[cellsToShow]=1
+[loop]=true
+
+[autoplay]=true
+[autoplayInterval]=7000
+[pauseOnHover]=true
+[dots]=true
+[arrows]=true
+[objectFit]='"cover"'
+[overflowCellsLimit]=1
+[transitionTimingFunction]='"ease-in"'
+[transitionDuration]=2000 
+[arrowsTheme]='"dark"'
+ >
+
+  
+
+</carousel>
+
+

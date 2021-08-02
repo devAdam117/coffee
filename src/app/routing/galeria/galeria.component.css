@@ -1,0 +1,77 @@
+
+.ss{
+    
+    
+}
+.example-chip-list{    
+    width: 100%;
+}
+.text_cont{
+    position: absolute;  
+    text-align: center; 
+    background-color: white;        
+    width: 100%;
+    left: 0;
+    height: 100%;    
+    margin: 0;
+    padding: 0;   
+    top: 70vh;
+}
+
+
+.example-chip-list{  
+     top: 0vh; 
+     width: 100%;        
+ /* width on resize .ts :)  */   
+     height: fit-content;
+     border: 2px solid rgb(49, 49, 49);     
+     border-radius: 0.3rem;
+     background-color: rgba(71, 70, 70, 0.767) !important;
+
+}
+
+.image_item{
+    color: black;
+    
+}
+
+.main_container{
+width: 100% !important;
+top: 0vh;
+height: 100vh;
+position: absolute;
+padding-right:0 !important;
+padding-left:0 !important;
+margin-right:auto !important;
+margin-left:auto !important;
+background-color: white;
+}
+
+.top_img{
+    position: absolute;
+    background-image: url("/assets/gallery.jpg");    
+    top: 0%; /* currentTop*/    
+    transition: 0.05s;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    vertical-align: middle;
+     /* responsive changing*/
+    background-size: cover;
+}
+.top_img_logo{    
+    top: 40%;
+    font-family: Marcellus;
+    font-size: 3.6rem;             
+}
+h1 {
+    color: black;
+}
+.chip_input{
+    border-bottom: 1px solid green;
+}
+.main_container {
+    height: 100%;
+    z-index: -5;
+}
