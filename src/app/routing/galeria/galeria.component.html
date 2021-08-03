@@ -12,9 +12,9 @@
         </div>
            
     
-        <div class="text_cont container-fluid">
+        <div class="text_cont container-fluid" [ngClass]="{'fullHeight': categories.length === 0}">
           
-          <mat-form-field class="example-chip-list" appearance="fill">  
+          <mat-form-field class="example-chip-list"  [style.width]="chipWidth+'%'" appearance="fill">  
     
             <mat-label>Kategórie</mat-label>
             <mat-chip-list #chipList aria-label="Výber kategórii" class="chip_input">
@@ -38,20 +38,34 @@
                 (matChipInputTokenEnd)="add($event,categoryInput)"
                >
             </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete"  (optionSelected)="selected($event)"
+            <mat-autocomplete  #auto="matAutocomplete"  (optionSelected)="selected($event)"
             >
-              <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+              <mat-option   *ngFor="let category of filteredCategories | async" [value]="category">
                 {{category}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-          <div >
-           <div class="col-12 image_item" *ngFor="let image of fiteredImages">
-             {{image.category}}
-             {{image.id}}</div>
-          </div>
          
+          <div class="row   imgs_cont"> 
+                
+              <div *ngFor="let image of fiteredImages" class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-xm-12 image_item ">
+                  <div  class="row">
+                    <div (click)="showBigImg(image)" class="img_background offset-1 col-10" [style.background-image]="'url(' + image.path + ')'" >
+                     
+                    </div>  
+                    
+                </div>  
+                <div  *ngIf="image.bigSize"  class="bigImgContainer">
+                  <img src="{{image.path}}" alt="" class="bigImg"> 
+                  <button class="cancel_btn" (click)="hideBigImg()">Späť</button>
+                </div>            
+              </div>
+           
         </div>
+        </div>
+        
+
+        
 
     
     

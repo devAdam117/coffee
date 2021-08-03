@@ -1,27 +1,74 @@
 
-.ss{
-    
+
+.example-chip-list{    
     
 }
-.example-chip-list{    
-    width: 100%;
+.fullHeight{
+    height: 30vh;
 }
 .text_cont{
     position: absolute;  
     text-align: center; 
     background-color: white;        
     width: 100%;
-    left: 0;
-    height: 100%;    
+    overflow: hidden;
+    left: 0;        
     margin: 0;
     padding: 0;   
     top: 70vh;
+    
 }
+.imgs_cont{
+padding-bottom: 3rem;
+}
+.bigImgContainer{
+    position: fixed;
+    left: 0%;
+    width: 100%;
+    height: fit-content;     
+    border: 3px solid black;     
+    z-index: 100; 
+    top: 10vh;        
+}
+.bigImg {
+    
+    display: block;      
+    margin-left: auto;
+  margin-right: auto;
+    max-width: 90%;
+    max-height:80vh ;
+    
+}
+.cancel_btn {
+    position: absolute;
+    left: 10%;    
+}
+.image_item{
+    height: fit-content;    
+    margin-top: 2rem;
+}
+
+.img_background{
+    transition: 0.3s;
+    background-repeat: no-repeat, repeat;
+    background-size: contain;
+    background-position: center;
+    width: fit-content !important;
+    height: 20rem;    
+    border-radius: 0.3rem;
+    cursor: pointer;
+   
+}
+
+
+
 
 
 .example-chip-list{  
      top: 0vh; 
-     width: 100%;        
+     margin: 1rem 0;
+     
+            
  /* width on resize .ts :)  */   
      height: fit-content;
      border: 2px solid rgb(49, 49, 49);     

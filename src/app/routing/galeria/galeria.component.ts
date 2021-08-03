@@ -23,10 +23,15 @@ export interface Fruit {
 
 export class GaleriaComponent implements OnInit {
   //resize variables
-  scrollImage:number=0 // scroll image onScroll()
-  positionText:number=65// position text onScroll()
-  changePosition:string
-  centerImage:number    
+  scrollImage:number=0; // scroll image onScroll()
+  positionText:number=65;// position text onScroll()
+  changePosition:string;
+  centerImage:number ;  
+  chipWidth:number ;
+  contentHeight:number;
+  bigImgHeight:number;
+  bigImgWidth:number;
+  bigImgLeft:number;
   //show variables   
   
 
@@ -37,51 +42,74 @@ export class GaleriaComponent implements OnInit {
   categoryCtrl = new FormControl();
   filteredCategories: Observable<string[]>;
   categories: string[] = ['Všetko'];
-  allCategories: string[] = ['Káva','Pivo', 'Jedlo', 'Ľudia', 'Priestory', 'Všetko'];
+  allCategories: string[] = ['Káva','Nápoje', 'Jedlo', 'Ľudia', 'Priestory', 'Všetko'];
   allImages=[
-    {id:1,category:"Pivo",path:"assets/gallery/beer1.jpg", status:false},
-    {id:2,category:"Pivo",path:"assets/gallery/beer1.jpg", status:false},
-    {id:3,category:"Pivo",path:"assets/gallery/beer1.jpg", status:false},
-    {id:4,category:"Pivo",path:"assets/gallery/beer1.jpg", status:false},
-    {id:5,category:"Pivo",path:"assets/gallery/beer1.jpg", status:false},
-    {id:6,category:"Pivo",path:"assets/gallery/beer1.jpg", status:false},
-    {id:7,category:"Pivo",path:"assets/gallery/beer1.jpg", status:false},
-    {id:8,category:"Ľudia",path:"assets/gallery/people1.jpg", status:false},
-    {id:9,category:"Ľudia",path:"assets/gallery/people2.jpg", status:false},
-    {id:10,category:"Ľudia",path:"assets/gallery/people3.jpg", status:false},
-    {id:11,category:"Ľudia",path:"assets/gallery/people4.jpg", status:false},
-    {id:12,category:"Ľudia",path:"assets/gallery/people5.jpg", status:false},
-    {id:13,category:"Ľudia",path:"assets/gallery/people6.jpg", status:false},
-    {id:14,category:"Ľudia",path:"assets/gallery/people7.jpg", status:false},
-    {id:15,category:"Priestory",path:"assets/gallery/surr1.jpg", status:false},
-    {id:16,category:"Priestory",path:"assets/gallery/surr2.jpg", status:false},
-    {id:17,category:"Priestory",path:"assets/gallery/surr3.jpg", status:false}
+    {id:1,category:"Nápoje",path:"/assets/gallery/beer1.jpg", status:false,bigSize:false},
+    {id:2,category:"Nápoje",path:"/assets/gallery/beer2.jpg", status:false,bigSize:false},
+    {id:3,category:"Nápoje",path:"/assets/gallery/beer3.jpg", status:false,bigSize:false},
+    {id:4,category:"Nápoje",path:"/assets/gallery/beer4.jpg", status:false,bigSize:false},
+    {id:5,category:"Nápoje",path:"/assets/gallery/beer5.jpg", status:false,bigSize:false},
+    {id:6,category:"Nápoje",path:"/assets/gallery/beer6.jpg", status:false,bigSize:false},
+    {id:7,category:"Nápoje",path:"/assets/gallery/beer7.jpg", status:false,bigSize:false},
+    {id:8, category:"Nápoje",path:"/assets/gallery/beer8.jpg", status:false,bigSize:false},
+    {id:9,category:"Nápoje",path:"/assets/gallery/beer9.jpg", status:false,bigSize:false},
+    {id:10,category:"Nápoje",path:"/assets/gallery/beer10.jpg", status:false,bigSize:false},
+    {id:11,category:"Ľudia",path:"/assets/gallery/people1.jpg", status:false,bigSize:false},
+    {id:12,category:"Ľudia",path:"/assets/gallery/people2.jpg", status:false,bigSize:false},
+    {id:13,category:"Ľudia",path:"/assets/gallery/people3.jpg", status:false,bigSize:false},
+    {id:14,category:"Ľudia",path:"/assets/gallery/people4.jpg", status:false,bigSize:false},
+    {id:15,category:"Ľudia",path:"/assets/gallery/people5.jpg", status:false,bigSize:false},
+    {id:16,category:"Ľudia",path:"/assets/gallery/people6.jpg", status:false,bigSize:false},
+    {id:17,category:"Ľudia",path:"/assets/gallery/people7.jpg", status:false,bigSize:false},
+    {id:18,category:"Ľudia",path:"/assets/gallery/people8.jpg", status:false,bigSize:false},
+    {id:19,category:"Ľudia",path:"/assets/gallery/people9.jpg", status:false,bigSize:false},
+    {id:20,category:"Priestory",path:"/assets/gallery/surr1.jpg", status:false,bigSize:false},
+    {id:21,category:"Priestory",path:"/assets/gallery/surr2.jpg", status:false,bigSize:false},
+    {id:22,category:"Priestory",path:"/assets/gallery/surr3.jpg", status:false,bigSize:false},
+    {id:23,category:"Káva",path:"/assets/gallery/coffee1.jpg", status:false,bigSize:false},
+    {id:24,category:"Káva",path:"/assets/gallery/coffee2.jpg", status:false,bigSize:false},
+    {id:25,category:"Káva",path:"/assets/gallery/coffee3.jpg", status:false,bigSize:false},
+    {id:26,category:"Káva",path:"/assets/gallery/coffee4.jpg", status:false,bigSize:false},
+    {id:27,category:"Káva",path:"/assets/gallery/coffee5.jpg", status:false,bigSize:false},
+    {id:28,category:"Káva",path:"/assets/gallery/coffee6.jpg", status:false,bigSize:false},
+    {id:28,category:"Jedlo",path:"/assets/gallery/food1.jpg", status:false,bigSize:false},
+    {id:28,category:"Jedlo",path:"/assets/gallery/food2.jpg", status:false,bigSize:false},
+    {id:28,category:"Jedlo",path:"/assets/gallery/food3.jpg", status:false,bigSize:false},
+    {id:28,category:"Jedlo",path:"/assets/gallery/food4.jpg", status:false,bigSize:false},
+    {id:28,category:"Jedlo",path:"/assets/gallery/food5.jpg", status:false,bigSize:false},
+    {id:28,category:"Jedlo",path:"/assets/gallery/food6.jpg", status:false,bigSize:false}
   ]
   fiteredImages;
 
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
 
-  
+  showBigImg(img_obj){
+    //only one can be big
+
+    this.allImages.forEach(e=>e.bigSize=false);
+    img_obj.bigSize=true;
+    console.log(img_obj)
+  }
+  hideBigImg(){
+    this.allImages.forEach(e=>e.bigSize=false);
+  }
   onChipIn(){     
-       
-    if(this.categories.includes("Všetko")){
-      this.fiteredImages=this.allImages.sort((obj_1,obj_2)=>{
-        //sort images randoomly on every window.load() by its id +0-100
-        
-        return (obj_1.id+Math.round(Math.random()*100))-(obj_2.id+Math.round(Math.random()*100));
+    
+    if(this.categories.includes("Všetko")){       
+      console.log(this.allImages)
+      this.fiteredImages=this.allImages.sort(()=>{
+        //sort images randoomly on every window.load()        
+       return Math.random()-0.5;       
       });
-    }
-    /* else if(this.categories.length==0){
-      this.fiteredImages=[];
-    } */
+    }    
     // else we filter them.. by checking selected categories right after adding one
     else {
       // work with fictive arr that is suitable for .filter because of settling true or false for each element
       let proccedingArr;
       
       this.categories.includes("Ľudia")? proccedingArr=this.allImages.map(e=> e.category==="Ľudia"? (e.status=true, e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Ľudia"? (e.status=false, e):(e.status,e)));
-      this.categories.includes("Pivo")? proccedingArr=this.allImages.map(e=> e.category==="Pivo"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Pivo"? (e.status=false, e):(e.status,e)));
+      this.categories.includes("Nápoje")? proccedingArr=this.allImages.map(e=> e.category==="Nápoje"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Nápoje"? (e.status=false, e):(e.status,e)));
       this.categories.includes("Jedlo")? proccedingArr=this.allImages.map(e=> e.category==="Jedlo"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Jedlo"? (e.status=false, e):(e.status,e)));
       this.categories.includes("Priestory")? proccedingArr=this.allImages.map(e=> e.category==="Priestory"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Priestory"? (e.status=false, e):(e.status,e)));
       this.categories.includes("Káva")? proccedingArr=this.allImages.map(e=> e.category==="Káva"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Káva"? (e.status=false, e):(e.status,e)));
@@ -109,7 +137,6 @@ export class GaleriaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.onResize("",window.innerWidth,window.innerHeight)
     this.onChipIn()
   }
@@ -219,14 +246,20 @@ export class GaleriaComponent implements OnInit {
     width=e.target.innerWidth
     }
     if(width>1550){
+      this.chipWidth=50
       
     }
       
-    else if (width<=1550 && width>886)
+    else if (width<=1550 && width>886){
     this.centerImage=20
+    this.chipWidth=70
+
+    }
     
     else {
       this.centerImage=40
+      this.chipWidth=95
+
 
     }
   }
