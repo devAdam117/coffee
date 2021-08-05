@@ -3,7 +3,7 @@ import { HostListener } from '@angular/core';
 import { Input } from '@angular/core';
 import { MatChipInput, MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, E, ENTER} from '@angular/cdk/keycodes';
-import { ElementRef, ViewChild} from '@angular/core';
+import { ElementRef, ViewChild,Directive} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
@@ -83,16 +83,56 @@ export class GaleriaComponent implements OnInit {
 
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
-
-  showBigImg(img_obj){
-    //only one can be big
-
-    this.allImages.forEach(e=>e.bigSize=false);
-    img_obj.bigSize=true;
-    console.log(img_obj)
+  hideBigImg2(e){
+   if(!e.target.attributes.class.nodeValue.includes("img_background")){
+    this.hideBigImg();
+   } 
   }
+  
   hideBigImg(){
     this.allImages.forEach(e=>e.bigSize=false);
+    this.visibilityForBigImg="hidden"
+    this.leftForBigImg=-50;
+  }
+  visibilityForBigImg:string="hidden";
+  btnLeft:number;
+  leftForBigImg:number//position it center on any client width :-)
+  
+  @ViewChild('bigImgContainer') imgContainer ; 
+  @ViewChild('bigImg') bigImg;
+  showBigImg(img_obj){
+    //only one can be big
+    this.allImages.forEach(e=>e.bigSize=false);
+    img_obj.bigSize=true; 
+    // should replace with observable??.
+    setTimeout(()=>{this.centerImg()},1)  
+    
+  }
+  loadedNum = 0;
+  loaded(){
+    console.log("Loading...")
+    this.loadedNum++;
+    console.log(this.loadedNum)
+  if(this.fiteredImages.length == this.loadedNum){
+    //console.log("All imgs are loaded!")
+  }
+  }
+  centerImg(){   
+    let containerWidth =this.imgContainer.nativeElement.clientWidth;
+    let bigImgWidth = this.bigImg.nativeElement.clientWidth;
+    let windowWidth =  document.querySelector(".top_img").clientWidth;  
+    this.visibilityForBigImg="visible";
+    if(this.bigImg.nativeElement.complete && this.bigImg.nativeElement.naturalHeight!=0 ){      
+      this.leftForBigImg= 100*(1-(containerWidth/windowWidth))/2;
+    this.btnLeft=100*((containerWidth-bigImgWidth)/2)/containerWidth
+    }
+      
+      
+    
+    
+    
+    
+
   }
   onChipIn(){     
     
@@ -129,7 +169,13 @@ export class GaleriaComponent implements OnInit {
   
 
 
-  constructor() { 
+  constructor( { nativeElement }: ElementRef<HTMLImageElement> ) { 
+    const supports = 'loading' in HTMLImageElement.prototype;
+
+    if (supports) {
+      nativeElement.setAttribute('loading', 'lazy');
+    }
+    
     this.filteredCategories = this.categoryCtrl.valueChanges.pipe(
       startWith(null),
       map((category: string | null) => category ? this._filter(category) : this.allCategories.slice()));
@@ -190,6 +236,7 @@ export class GaleriaComponent implements OnInit {
     }
     this.onChipIn();
   }
+  
 
   selected(event: MatAutocompleteSelectedEvent): void {
   if(event.option.viewValue=="Všetko"){
@@ -273,8 +320,7 @@ export class GaleriaComponent implements OnInit {
   let currentImgDisappearanceRatio
   let startDissapearanceRatio
   let endDissapearanceRatio = 1
-  let imgScrollRatio
-  document.querySelector("mat-sidenav-content")
+  let imgScrollRatio  
   // see how much I scrolled
   
   let imgHeight =document.querySelector(".top_img").scrollHeight
@@ -283,7 +329,7 @@ export class GaleriaComponent implements OnInit {
   // convert those pixels in to the VH so we can add on scroll VH  
  height.addEventListener("scroll",()=>{
   currentImgDisappearanceRatio=(height.scrollHeight-height.scrollTop)/942
-  startDissapearanceRatio = height.scrollHeight/942
+  startDissapearanceRatio = height.scrollHeight/942  
   if(endDissapearanceRatio/currentImgDisappearanceRatio<1 && currentImgDisappearanceRatio!=startDissapearanceRatio){
     imgScrollRatio = (startDissapearanceRatio-currentImgDisappearanceRatio)/(startDissapearanceRatio-endDissapearanceRatio)
   }

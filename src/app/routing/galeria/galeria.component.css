@@ -6,6 +6,9 @@
 .fullHeight{
     height: 30vh;
 }
+.fitHeight{
+    height: fit-content;
+}
 .text_cont{
     position: absolute;  
     text-align: center; 
@@ -23,25 +26,35 @@ padding-bottom: 3rem;
 }
 .bigImgContainer{
     position: fixed;
-    left: 0%;
-    width: 100%;
-    height: fit-content;     
-    border: 3px solid black;     
+    width: fit-content;    
+    height: fit-content;   
+    transition: 0.65s ease-in;
+    visibility: hidden;       
     z-index: 100; 
-    top: 10vh;        
+    top: 12vh;        
 }
-.bigImg {
-    
+.bigImg {      
     display: block;      
     margin-left: auto;
-  margin-right: auto;
+    margin-right: auto;
     max-width: 90%;
+    border-radius: 0.5rem;   
     max-height:80vh ;
     
 }
 .cancel_btn {
     position: absolute;
-    left: 10%;    
+    top: 2%;
+    font-size: 1.9rem;   
+    font-family: 'Shadows Into Light', cursive;
+    width: fit-content;
+    height: fit-content;
+    transition: 0.3s;
+    outline: none;        
+}
+.cancel_btn:focus {
+    color: white;
+background: rgba(255, 0, 0, 0.664);
 }
 .image_item{
     height: fit-content;    
@@ -53,7 +66,7 @@ padding-bottom: 3rem;
     background-repeat: no-repeat, repeat;
     background-size: contain;
     background-position: center;
-    width: fit-content !important;
+    width: auto !important;
     height: 20rem;    
     border-radius: 0.3rem;
     cursor: pointer;
@@ -122,3 +135,4 @@ h1 {
     height: 100%;
     z-index: -5;
 }
+

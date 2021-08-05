@@ -1,7 +1,7 @@
 
 <div (window:resize)="onResize($event)" class="comp_cont">
   
-  <div [style.width]="onResizeImgWidth +'%'" [style.background-position-x]="imgPosOnResize+'%'"  class="background_img">
+  <div [style.width]="onResizeImgWidth +'%'" [style.background-position-x]="imgPosOnResize+'%'"  class="background_img" load="lazy">
     <div [style.width]="onResizeButtonWidth+'%'" class="center">
       <button [style.line-height]="buttonLineHeight+'rem'"  [style.font-size]="buttonFontSize+'rem'" [ngClass]="{'d-none' : showForm}" (click)="showEl()" class="reserve_button" >Bookni si miesto!</button>
     </div>
@@ -182,7 +182,7 @@
           <p class="text-success status_showing_text">Rezervácia je hotová!</p>
           <p class="final_res_info">Meno: <small > {{reservationForm.get("name").value}} </small></p>
           <p class="final_res_info">Email:<small > {{email.value}} </small></p>
-          <p class="final_res_info">Dátum:<small > {{showFormatedDate()}} </small></p>
+          <p class="final_res_info">Dátum:<small > {{date.value|date: 'M/d/yyyy'}} </small></p>
           <p class="final_res_info">Čas: <small >{{time.value}} </small></p>
           <p class="final_res_info">Počet hostí: <small >{{numOfPeople.value}} </small></p>
           <p >Tešíme sa na vás!! :)</p>
