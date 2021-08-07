@@ -8,8 +8,8 @@
   <mat-sidenav-container   class="sidenav-container sidenav_cont">
     <mat-sidenav   #sidenav autoFocus="false" mode="push"  [(opened)]="isMenuOpen" class="sidenav">
       <a [ngClass]="{'active_nav': currentRoute === '/domov'}"  mat-button routerLink="/domov" >Domov</a>
+      <a [ngClass]="{'active_nav': currentRoute === '/kto-sme'}"  mat-button routerLink="/kto-sme">O nás</a>
       <a [ngClass]="{'active_nav': currentRoute === '/otvaracie-hodiny'}"  mat-button routerLink="/otvaracie-hodiny">Otváracie hodiny</a>
-      <a [ngClass]="{'active_nav': currentRoute === '/obchod'}"  mat-button routerLink="/obchod">Obchod</a>
       <a [ngClass]="{'active_nav': currentRoute === '/rezervacie'}"  mat-button  routerLink="/rezervacie">Rezervácia</a>
       <a [ngClass]="{'active_nav': currentRoute === '/galeria'}"  mat-button  routerLink="/galeria">Galéria</a>
       <a [ngClass]="{'active_nav': currentRoute === '/mapa'}"  mat-button routerLink="/mapa">Mapa</a>
@@ -36,8 +36,8 @@
           
           <ul  *ngIf="!openSidenavFlag" class="nav-content mr-4 ">
            <li ><a [ngClass]="{'active_nav': currentRoute === '/domov'}"  class="active_nav"   routerLink="/domov">Domov</a></li>
-           <li><a [ngClass]="{'active_nav': currentRoute === '/otvaracie-hodiny'}"   routerLink="/otvaracie-hodiny">Otváracie hodiny</a></li>
-            <li><a [ngClass]="{'active_nav': currentRoute === '/obchod'}"   routerLink="/obchod">Obchod</a></li>
+           <li><a [ngClass]="{'active_nav': currentRoute === '/kto-sme'}"   routerLink="/kto-sme">O nás</a></li>
+           <li><a [ngClass]="{'active_nav': currentRoute === '/otvaracie-hodiny'}"   routerLink="/otvaracie-hodiny">Otváracie hodiny</a></li>            
             <li><a [ngClass]="{'active_nav': currentRoute === '/rezervacie'}"   routerLink="/rezervacie">Rezervácia</a></li>
             <li><a [ngClass]="{'active_nav': currentRoute === '/galeria'}"   routerLink="/galeria">Galéria</a></li>
             <li><a [ngClass]="{'active_nav': currentRoute === '/mapa'}"   routerLink="/mapa">Mapa</a></li>

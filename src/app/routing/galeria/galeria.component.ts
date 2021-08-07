@@ -85,48 +85,53 @@ export class GaleriaComponent implements OnInit {
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   hideBigImg2(e){
    if(!e.target.attributes.class.nodeValue.includes("img_background")){
-    this.hideBigImg();
+    this.hideBigImg("diss_mode");
    } 
   }
   
-  hideBigImg(){
-    this.allImages.forEach(e=>e.bigSize=false);
-    this.visibilityForBigImg="hidden"
-    this.leftForBigImg=-50;
+  hideBigImg(mode){
+    if(mode=="diss_mode"){
+      //when not clicking on existb utton
+      this.leftForBigImg=Math.round(Math.random()*2-1)*50;
+      setTimeout(()=>{
+        this.allImages.forEach(e=>e.bigSize=false);
+      },450) 
+    }
+    else {
+      //when clicking exit button
+      this.allImages.forEach(e=>e.bigSize=false);
+      this.leftForBigImg=Math.round(Math.random()*2-1)*50;  
+    }
+      
+    
   }
   visibilityForBigImg:string="hidden";
   btnLeft:number;
-  leftForBigImg:number//position it center on any client width :-)
+  leftForBigImg:number=-40//position it center on any client width :-)
   
   @ViewChild('bigImgContainer') imgContainer ; 
   @ViewChild('bigImg') bigImg;
   showBigImg(img_obj){
     //only one can be big
     this.allImages.forEach(e=>e.bigSize=false);
-    img_obj.bigSize=true; 
+    img_obj.bigSize=true;
+   
+
     // should replace with observable??.
     setTimeout(()=>{this.centerImg()},1)  
     
-  }
-  loadedNum = 0;
-  loaded(){
-    console.log("Loading...")
-    this.loadedNum++;
-    console.log(this.loadedNum)
-  if(this.fiteredImages.length == this.loadedNum){
-    //console.log("All imgs are loaded!")
-  }
-  }
-  centerImg(){   
+  }  
+ 
+  centerImg(){           
     let containerWidth =this.imgContainer.nativeElement.clientWidth;
     let bigImgWidth = this.bigImg.nativeElement.clientWidth;
     let windowWidth =  document.querySelector(".top_img").clientWidth;  
-    this.visibilityForBigImg="visible";
-    if(this.bigImg.nativeElement.complete && this.bigImg.nativeElement.naturalHeight!=0 ){      
+    this.visibilityForBigImg="visible";          
       this.leftForBigImg= 100*(1-(containerWidth/windowWidth))/2;
-    this.btnLeft=100*((containerWidth-bigImgWidth)/2)/containerWidth
-    }
-      
+      this.btnLeft=100*((containerWidth-bigImgWidth)/2)/containerWidth
+     
+    
+     
       
     
     
@@ -272,17 +277,10 @@ export class GaleriaComponent implements OnInit {
     return this.allCategories.filter(category => category.toLowerCase().includes(filterValue));
   }
 
-  
-  
-  
-
-  
-
-
   //resize fncton
   onResize(e,w?,h?){
     let height
-    let width
+    let width    
     if(e==""){
       height=h
       width=w

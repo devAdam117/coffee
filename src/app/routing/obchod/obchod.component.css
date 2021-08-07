@@ -1,0 +1,56 @@
+.container-fluid{
+    color: black;   
+    padding: 0 !important;   
+    margin: 0!important;
+    width: 100% !important; 
+    position: relative;    
+     
+}
+.main_cont{
+    
+}
+.top_img_logo{      
+    top: 40%;    
+    font-family: Marcellus;
+    font-size: 3.6rem;   
+    color: rgba(248, 72, 8, 0.692);  
+    text-shadow: 1px 1px 6px rgba(248, 72, 8, 0.692);
+    z-index: -3;        
+}
+.img_place{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 60vh;
+    background-image: url("/assets/waiter.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;    
+    display: flex;    
+    justify-content: center;
+    align-items: center;   
+    z-index: -3;
+    
+}
+.text_cont{
+    position: absolute;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: -2;
+    top: 60vh;
+    overflow-x: hidden;
+    height: fit-content;
+   
+    
+    
+}
+.text_title{
+    width: fit-content;
+    font-size: 1.36rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid orangered;
+}
+.text_item{   
+    font-size: 1rem;
+    letter-spacing: 1px;
+    
+}

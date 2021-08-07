@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'domov', component: DomovComponent},
   {path: 'kontakt', component: KontaktComponent},
   {path: 'mapa', component: MapaComponent},
-  {path: 'obchod', component: ObchodComponent},
+  {path: 'kto-sme', component: ObchodComponent},
   {path: 'otvaracie-hodiny', component: OtvHodinyComponent},
   {path:'rezervacie', component: RezervacieComponent},
   {path:'galeria',component:GaleriaComponent},
