@@ -23,6 +23,7 @@ export interface Fruit {
 
 export class GaleriaComponent implements OnInit {
   //resize variables
+  
   scrollImage:number=0; // scroll image onScroll()
   positionText:number=65;// position text onScroll()
   changePosition:string;
@@ -32,6 +33,11 @@ export class GaleriaComponent implements OnInit {
   bigImgHeight:number;
   bigImgWidth:number;
   bigImgLeft:number;
+  nextBtnRight:number;
+  prevBtnLeft:number;
+  btnFontSize:number;
+  btnsTop:number
+  btnPositionOnResize:string
   //show variables   
   
 
@@ -84,9 +90,18 @@ export class GaleriaComponent implements OnInit {
 
   @ViewChild('categoryInput') categoryInput: ElementRef<HTMLInputElement>;
   hideBigImg2(e){
-   if(!e.target.attributes.class.nodeValue.includes("img_background")){
+   if(!e.target.attributes.class.nodeValue.includes("img_background") && !(e.target.attributes.class.nodeValue.includes("previousBtn")
+   || e.target.attributes.class.nodeValue.includes("nextBtn"))){     
     this.hideBigImg("diss_mode");
    } 
+   else if (e.target.attributes.class.nodeValue.includes("previousBtn")){
+    this.hideBigImg("prev_img")
+
+   }
+   else if(e.target.attributes.class.nodeValue.includes("nextBtn")){
+    this.hideBigImg("next_img")
+
+   }
   }
   
   hideBigImg(mode){
@@ -97,52 +112,79 @@ export class GaleriaComponent implements OnInit {
         this.allImages.forEach(e=>e.bigSize=false);
       },450) 
     }
+    else if(mode=="next_img"){
+      this.nextImg()
+    }
+    else if(mode=="prev_img"){
+      this.previousImg()
+    }
     else {
       //when clicking exit button
       this.allImages.forEach(e=>e.bigSize=false);
       this.leftForBigImg=Math.round(Math.random()*2-1)*50;  
     }
-      
+  }
+  // currentImg represent currentlyShowed big img from our initial fiteredArray 
+  currentImg
+  previousImg(){   
+    let currImgIndex=this.fiteredImages.indexOf(this.currentImg)
+    let minIndex = 0
+    if(currImgIndex!=0){
+    this.showBigImg(this.fiteredImages[currImgIndex-1])    
+    }
+    else {      
+      this.showBigImg(this.fiteredImages[this.fiteredImages.length-1])
+    }
+  }
+  nextImg(){
+    let currImgIndex=this.fiteredImages.indexOf(this.currentImg)
+    let maxIndex = this.fiteredImages.length
+    if(currImgIndex!=maxIndex-1){
+    this.showBigImg(this.fiteredImages[currImgIndex+1])  
+    }
+    else {
+      this.showBigImg(this.fiteredImages[0])
+    }
+
     
+
   }
   visibilityForBigImg:string="hidden";
   btnLeft:number;
   leftForBigImg:number=-40//position it center on any client width :-)
+  topForBigImg:number
   
   @ViewChild('bigImgContainer') imgContainer ; 
   @ViewChild('bigImg') bigImg;
   showBigImg(img_obj){
+    this.currentImg=img_obj
     //only one can be big
     this.allImages.forEach(e=>e.bigSize=false);
     img_obj.bigSize=true;
+    
    
 
     // should replace with observable??.
-    setTimeout(()=>{this.centerImg()},1)  
+    setTimeout(()=>{this.centerImg()},1)  ;
     
   }  
  
   centerImg(){           
     let containerWidth =this.imgContainer.nativeElement.clientWidth;
     let bigImgWidth = this.bigImg.nativeElement.clientWidth;
-    let windowWidth =  document.querySelector(".top_img").clientWidth;  
-    this.visibilityForBigImg="visible";          
+    let windowWidth =  document.querySelector(".top_img").clientWidth; 
+    let windowHeight =  document.querySelector(".top_img").clientHeight; 
+    let containerHeight = this.imgContainer.nativeElement.clientHeight;
+    this.topForBigImg=100*(1-(containerHeight/windowHeight))/2;    
+      this.visibilityForBigImg="visible";         
       this.leftForBigImg= 100*(1-(containerWidth/windowWidth))/2;
-      this.btnLeft=100*((containerWidth-bigImgWidth)/2)/containerWidth
-     
-    
-     
-      
-    
-    
-    
-    
-
+      this.btnLeft=100*((containerWidth-bigImgWidth)/2)/containerWidth;
   }
+
   onChipIn(){     
     
     if(this.categories.includes("Všetko")){       
-      console.log(this.allImages)
+      
       this.fiteredImages=this.allImages.sort(()=>{
         //sort images randoomly on every window.load()        
        return Math.random()-0.5;       
@@ -158,7 +200,7 @@ export class GaleriaComponent implements OnInit {
       this.categories.includes("Jedlo")? proccedingArr=this.allImages.map(e=> e.category==="Jedlo"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Jedlo"? (e.status=false, e):(e.status,e)));
       this.categories.includes("Priestory")? proccedingArr=this.allImages.map(e=> e.category==="Priestory"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Priestory"? (e.status=false, e):(e.status,e)));
       this.categories.includes("Káva")? proccedingArr=this.allImages.map(e=> e.category==="Káva"? (e.status=true,e):(e.status,e)):(proccedingArr=this.allImages.map(e=> e.category==="Káva"? (e.status=false, e):(e.status,e)));
-      console.log(proccedingArr);
+      
       // filter and show only those with status==true
       this.fiteredImages=proccedingArr.filter(e=>e.status===true);
       // sort filteredImages by chips order in input(by this.categories)
@@ -279,6 +321,7 @@ export class GaleriaComponent implements OnInit {
 
   //resize fncton
   onResize(e,w?,h?){
+    
     let height
     let width    
     if(e==""){
@@ -291,20 +334,34 @@ export class GaleriaComponent implements OnInit {
     width=e.target.innerWidth
     }
     if(width>1550){
-      this.chipWidth=50
+      this.chipWidth=50   
+      this.btnPositionOnResize="fixed"
+      this.btnsTop=50
+      this.prevBtnLeft=5
+      this.nextBtnRight=5
+      this.btnFontSize=4  
       
     }
       
     else if (width<=1550 && width>886){
     this.centerImage=20
+    this.btnPositionOnResize="fixed"
+    this.btnsTop=50
+
+    this.prevBtnLeft=0
+    this.nextBtnRight=0
+    this.btnFontSize=4
     this.chipWidth=70
+    
 
     }
     
     else {
       this.centerImage=40
-      this.chipWidth=95
-
+      this.btnPositionOnResize="absolute"
+      this.btnsTop=85      
+      this.chipWidth=95     
+      this.btnFontSize=3.5
 
     }
   }
@@ -339,7 +396,7 @@ export class GaleriaComponent implements OnInit {
 
   }
   this.scrollImage= -(imgHeight/50)*imgScrollRatio
-  //console.log(imgHeight)
+  
 })   
 
   }

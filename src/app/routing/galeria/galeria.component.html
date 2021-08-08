@@ -55,9 +55,12 @@
                     </div>  
                     
                 </div>  
-                <div  [style.left]="leftForBigImg+'%'" [style.visibility]="visibilityForBigImg"  *ngIf="image.bigSize"  class="bigImgContainer" #bigImgContainer>
+                <div [style.top]="topForBigImg+'%'"  [style.left]="leftForBigImg+'%'" [style.visibility]="visibilityForBigImg"  *ngIf="image.bigSize"  class="bigImgContainer" #bigImgContainer>
                   <img src="{{image.path}}" alt="" class="bigImg" #bigImg >                  
-                  <button [style.left]="btnLeft+'%'" color='warn' class="cancel_btn" mat-button (click)="hideBigImg(bigImg)" >X</button>
+                  <button [style.left]="btnLeft+'%'"  color='warn' class="cancel_btn" mat-button (click)="hideBigImg(bigImg)" >X</button>
+                  <button [style.left]="prevBtnLeft+'%'" [style.top]="btnsTop+'%'"  [style.position]="btnPositionOnResize" [style.font-size]="btnFontSize+'rem'" class="previousBtn" ><</button>
+                  <button [style.right]="nextBtnRight+'%'" [style.top]="btnsTop+'%'" [style.position]="btnPositionOnResize" [style.font-size]="btnFontSize+'rem'" class="nextBtn" >></button>
+
                 </div>            
               </div>
            

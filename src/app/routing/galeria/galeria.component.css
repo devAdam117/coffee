@@ -30,8 +30,41 @@ padding-bottom: 3rem;
     height: fit-content;   
     transition: 0.65s ease-in;
     visibility: hidden;       
-    z-index: 100; 
-    top: 12vh;        
+    z-index: 100;     
+}
+.nextBtn{
+    font-size:4rem;
+    font-family: 'Shadows Into Light', cursive;
+    position: fixed;
+    color: rgba(128, 128, 128, 0.801);
+    background-color: transparent;
+    right: 5%;   
+    top: 50%;
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    transition: 0.3s;
+    outline: none;
+}
+.previousBtn{
+    font-size: 4rem;
+    font-family: 'Shadows Into Light', cursive;
+    color: rgba(128, 128, 128, 0.801);
+    position: fixed;
+    left: 5%;    
+    background-color: transparent;
+    top: 50%;
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    transition: 0.3s;
+    outline: none;
+}
+.nextBtn:hover , .previousBtn:hover {
+    color: black;
+}
+.nextBtn:focus , .previousBtn:focus {
+    font-size: 4.5rem;
 }
 .bigImg {      
     display: block;      
