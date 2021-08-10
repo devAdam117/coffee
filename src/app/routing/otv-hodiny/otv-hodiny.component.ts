@@ -23,6 +23,7 @@ export class OtvHodinyComponent implements OnInit {
   moveOnLoad:number;
   scheduleFitWidth:string;
   moveOnLoadTop:number;
+  
   constructor() { }
 
   ngOnInit(): void { 
@@ -58,7 +59,7 @@ export class OtvHodinyComponent implements OnInit {
       height = startingHeight;
     }
     //
-    if(width>780 ){
+    if(width>780 ){      
       if(height>880){
         this.logoWidth=30;
         this.xPosImg=240;

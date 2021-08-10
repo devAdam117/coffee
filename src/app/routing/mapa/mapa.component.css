@@ -1,8 +1,77 @@
-.comp_cont{
+.container-fluid{
+    color: rgb(194, 192, 192);   
+    padding: 0 !important;   
+    margin: 0!important;
+    width: 100% !important; 
+    position: relative;         
+    top: 0vh;          
+}
+.map_content {    
     position: absolute;
+    background-color: rgba(0, 0, 0,0.035);
+    padding:1rem;
+    height: fit-content;
     width: 100%;
+    overflow-x: hidden;
+    top: -50vh;
+    left: -100%;
+    transition: all 0.35s ease-in;
+    margin: 0 auto ;  
+    z-index: -2;
+
+}
+h2 {
+    border-bottom: 0.2rem solid black;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    font-size: 3rem;
+    font-family: 'Dancing Script', cursive;
+    z-index: -2;
+    transition: 0.3s;
+
+}
+.orCol{
+    color: orangered;
+    border-bottom: none;
+}
+.img_cont{    
+    position: absolute;    
+    top: 0vh;
     height: 100vh;
-    z-index: -5;
-    color: black;
+    width: 100%;
+    background-image: url("/assets/searching.jpg");
+    background-size: cover;
+    background-origin: center;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;   
+    transition: 0.6s;
+    opacity: 0.93; 
+    z-index: -3;
+}
+.google_map{    
+    opacity: 0.92;    
+    transition: 0.3s;       
+}
+
+
+.sub_text{
+margin-left: 8rem;
+margin-bottom: 0;
+margin-top: 0;
+transition: 0.3s;
+visibility: hidden;
     
-    }
+}
+.moveLeft{
+    visibility: visible;
+    margin-left: 0;
+}
+.moveBottom{
+    margin-top:1rem;
+}
+.backColor{
+    opacity: 1;
+}

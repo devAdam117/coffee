@@ -35,13 +35,16 @@ padding-bottom: 3rem;
 .nextBtn{
     font-size:4rem;
     font-family: 'Shadows Into Light', cursive;
-    position: fixed;
-    color: rgba(128, 128, 128, 0.801);
-    background-color: transparent;
+    position: fixed; 
+    color: white;
+
+    background-color: rgba(0, 0, 0, 0.575);
     right: 5%;   
     top: 50%;
     height: fit-content;
+    padding: 1rem;
     width: fit-content;
+    border-radius: 0.3rem;
     border: none;
     transition: 0.3s;
     outline: none;
@@ -49,19 +52,22 @@ padding-bottom: 3rem;
 .previousBtn{
     font-size: 4rem;
     font-family: 'Shadows Into Light', cursive;
-    color: rgba(128, 128, 128, 0.801);
+    color: white;
     position: fixed;
-    left: 5%;    
-    background-color: transparent;
+    left: 5%;        
+    background-color: rgba(0, 0, 0, 0.575);
     top: 50%;
     height: fit-content;
+    padding: 1rem;
     width: fit-content;
+    border-radius: 0.3rem;
     border: none;
     transition: 0.3s;
     outline: none;
 }
 .nextBtn:hover , .previousBtn:hover {
     color: black;
+    background-color: rgba(255, 255, 255, 0.466);
 }
 .nextBtn:focus , .previousBtn:focus {
     font-size: 4.5rem;

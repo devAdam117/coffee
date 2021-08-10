@@ -327,11 +327,11 @@ export class GaleriaComponent implements OnInit {
     if(e==""){
       height=h
       width=w
-    
+      
     }
     else {
     height =e.target.innerHeight
-    width=e.target.innerWidth
+    width=e.target.innerWidth   
     }
     if(width>1550){
       this.chipWidth=50   
@@ -347,7 +347,6 @@ export class GaleriaComponent implements OnInit {
     this.centerImage=20
     this.btnPositionOnResize="fixed"
     this.btnsTop=50
-
     this.prevBtnLeft=0
     this.nextBtnRight=0
     this.btnFontSize=4
@@ -359,7 +358,7 @@ export class GaleriaComponent implements OnInit {
     else {
       this.centerImage=40
       this.btnPositionOnResize="absolute"
-      this.btnsTop=85      
+      this.btnsTop=50      
       this.chipWidth=95     
       this.btnFontSize=3.5
 
