@@ -8,6 +8,7 @@ import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { KeyValuePipe } from '@angular/common';
 
 export interface Fruit {
   name: string;
@@ -102,6 +103,26 @@ export class GaleriaComponent implements OnInit {
     this.hideBigImg("next_img")
 
    }
+  }
+  //key event binding
+  @HostListener('window:keyup',['$event'])
+  keyEvent(event:KeyboardEvent){
+    if(this.bigImg){
+     if(event.keyCode===39){
+       this.nextImg();
+      }
+     else if(event.keyCode===37){
+       this.previousImg();
+      }
+     else if (event.keyCode===27){
+       this.hideBigImg(this.bigImg);
+     }
+      
+
+    }
+    else {
+      
+    }
   }
   
   hideBigImg(mode){

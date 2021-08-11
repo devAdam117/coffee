@@ -15,7 +15,7 @@
       <a [ngClass]="{'active_nav': currentRoute === '/mapa'}"  mat-button routerLink="/mapa">Mapa</a>
       <a [ngClass]="{'active_nav': currentRoute === '/kontakt'}"  mat-button routerLink="/kontakt">Kontakt</a>
     </mat-sidenav> 
-    <mat-sidenav-content (scroll)="checkMyHeight($event)">
+    <mat-sidenav-content  (scroll)="checkMyHeight($event)">
       <div class="loading-overlay" *ngIf="loading" [ngClass]="{'d-none': !loading}">  
         <mat-spinner [diameter]=diameter ></mat-spinner>
       </div>

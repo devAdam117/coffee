@@ -3,8 +3,10 @@
     padding: 0 !important;   
     margin: 0!important;
     width: 100% !important; 
-    position: relative;         
-    top: 0vh;          
+    position: relative;      
+    top: 0vh;   
+    
+         
 }
 .map_content {    
     position: absolute;
@@ -53,7 +55,7 @@ h2 {
 }
 .google_map{    
     opacity: 0.92;    
-    transition: 0.3s;       
+    transition: 0.3s ease-in;       
 }
 
 
@@ -70,7 +72,7 @@ visibility: hidden;
     margin-left: 0;
 }
 .moveBottom{
-    margin-top:1rem;
+    margin-top:2rem;
 }
 .backColor{
     opacity: 1;

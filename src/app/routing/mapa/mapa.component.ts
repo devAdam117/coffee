@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,6 +13,11 @@ export class MapaComponent implements OnInit {
   imageHover:boolean
   subTextMarginLeft:number
   backgroundColorOnWidth:string
+  textToShow:string
+  textContent:Array<string>=["Nachádzame sa v centre Martina, v blízkosti Milénia",
+  "Ponúkame domáce 11° remesélne pivko (gazda) už od 1,4 €",
+  "Pražená kávička so sebou od 1 €",
+"Každý piatok super menu za 4 € (burger podľa vlastného výberu + pivko gazda) "]
   constructor() { }
 
   ngOnInit(): void {
@@ -20,6 +26,9 @@ export class MapaComponent implements OnInit {
       this.topOnLoad=10
     },400)
     this.onResize("",window.innerWidth,window.innerHeight)
+    setTimeout(()=>{
+      !this.imageHover ?  this.hoverHandler():0;     
+    },5000)
   }
   onResize(e,w?,h?){
     let height
@@ -110,11 +119,28 @@ export class MapaComponent implements OnInit {
   hoverHandler(){
     if(!this.imageHover){
     this.imageHover=true
+    let i =0;
+    this.textToShow=this.textContent[i]
+    //infinite loop through text array
+    setInterval(()=>{
+      if(i<this.textContent.length){ 
+        this.subTextMarginLeft=3
+        i++;
+        this.textToShow=this.textContent[i]      
+        if(i===this.textContent.length-1){ 
+          i=-1;
+        }
+      }
+    },5000)
+      
+    
+    
+    
     setTimeout(()=>{
-      this.subTextMarginLeft=0
+      this.subTextMarginLeft=0      
     },1)
   }
-  console.log(1)
+  
 }
 
 }

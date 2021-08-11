@@ -1,1 +1,47 @@
-<p>kontakt works!</p>
+
+<div   class="container-fluid contact_cont main_cont" (window:resize)="onResize($event)">
+    <div  class="back_img"> 
+        <h1 *ngIf="heightIsBig" class="img_logo" [ngClass]="{'dissapearUp': scrolledDown===true, 'showFromUp': scrolledDown===false}">Kontakt</h1>
+        
+    </div> 
+    <div class="row info_container"> 
+        <div class="contact_info mt-3 offset-1 col-lg-3 col-md-10 col-sm-10 col-xs-10">
+            <h1 class="contact_tit">Základné informácie</h1>
+            <p class="contact_par">Štúrovo námestie 15</p>
+            <p class="contact_par">036 01 Martin</p>
+            <p class="contact_par">Next Coffe <small>since 2021</small></p>
+            <p class="contact_par">Prevádzkovateľ: Tvoj Tatko Records, s.r.o.</p>
+        </div>
+        <div class="contact_form mt-3 offset-1 col-lg-5">
+            
+            <h2 class="cont_form_item">Kontaktný formulár!</h2>
+           <!--<mat-form-field class="mat_form cont_form_item" appearance="fill" color="accent"> -->                 
+                <input class="ask_input" #nameInput    placeholder="Zadajte email, kde vám môžeme odpovedať" >
+                <input class="ask_input" type="text" placeholder="Vaše meno">
+                <input class="ask_input" type="text" placeholder="Predmet správy">
+                <textarea #textArea placeholder="Na čo sa chcete opýtať?"  class="cont_form_item text_area textArea"  id=""   rows=20 ></textarea>
+                <button class="submit_ask_btn" mat-button>Odoslať</button>
+              <!-- </mat-form-field>     --> 
+        </div>
+        <div class="newsletter_form mt-3 col-12 ">
+            <h2 class="newsletter_text">Chcete dostávať automaticky najnovšie akcie, zľavy, nové produkty a podobne?</h2>
+            <p class="newsletter_text">Prihláste sa na odber našého newsletteru</p>
+            <!--<mat-form-field class="mat_form cont_form_item" appearance="fill" color="accent"> --> 
+                <input class="news_input" type="text" placeholder="Zadajte mail, na ktorý vám budú automatický chodiť novinky">
+                <button class="submit_news_btn" mat-button>Odoberať</button>
+
+            <!-- </mat-form-field>     --> 
+        </div>
+        <div  class="contact_links col-12">
+            <ul [style.width]="iconWrapperWidth+'%'" class="icon_wrapper">
+                <li [style.transform]="iconMoveRight" class="icon_item fb_item "><a href="https://www.facebook.com/" class=" fb fa fa-facebook"></a></li>
+                <li [style.transform]="iconMoveTop" class="icon_item tw_item "><a href="https://twitter.com/" class=" tw fa fa-twitter"></a></li>
+                <li [style.transform]="iconMoveLeft" class="icon_item ig_item "><a href="https://www.instagram.com/" class=" ig fa fa-instagram"></a></li>
+            </ul>
+
+        </div>
+        
+     </div>
+         
+    
+</div>

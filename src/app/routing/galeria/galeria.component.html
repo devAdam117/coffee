@@ -1,7 +1,7 @@
 
 
 <div   (wheel)="onScroll()" (click)="hideBigImg2($event)"   (window:resize)="onResize($event)" id="scroll_cont" class="main_container"  #main> 
-    <div [style.position]="changePosition"   class="container-fluid main_container " >
+    <div       [style.position]="changePosition"   class="container-fluid main_container " >
 
             <div class="col-12 top_img" [style.background-position-y]="scrollImage+'vh'"
              [style.line-height]="positionText+'vh'" [style.background-position-x]="centerImage+'%'">
@@ -12,7 +12,7 @@
         </div>
            
     
-        <div class="text_cont container-fluid" [ngClass]="{'fullHeight': categories.length === 0,'fitHeight':categories.length!=0}">
+        <div  class="text_cont container-fluid" [ngClass]="{'fullHeight': categories.length === 0,'fitHeight':categories.length!=0}">
           
           <mat-form-field class="example-chip-list"  [style.width]="chipWidth+'%'" appearance="fill">  
     

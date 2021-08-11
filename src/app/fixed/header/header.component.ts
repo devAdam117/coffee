@@ -45,6 +45,7 @@ export class HeaderComponent implements OnInit {
       this.isMenuOpen=false;      
     }
   }
+  
   // spin wheel while loading content for router
   navigationChanger(event): void {
     

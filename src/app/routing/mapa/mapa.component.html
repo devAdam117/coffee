@@ -1,9 +1,9 @@
 <div  class="container-fluid main_cont" (window:resize)="onResize($event)">
   <div [style.background-color]="backgroundColorOnWidth"  align="center" class="map_content" [style.left]="leftOnLoad+'%'"  [style.top]="topOnLoad+'vh'">
     <h2 [ngClass]="{'orCol':imageHover}" id="google_map">Kde nás nájdete?</h2>  
-    <p  class="sub_text" [ngClass]="{'moveLeft':imageHover}" >Nachádzame sa v centre Martina, v blízkosti Milénia</p>
+    <p  class="sub_text" [ngClass]="{'moveLeft':imageHover}" >{{textToShow}}</p>
     
-      <iframe (mouseenter)="hoverHandler()"  [ngClass]="{'moveBottom':imageHover}" [style.width]="iFrameWidth+'%'" class="google_map "src="https://www.google.com/maps/d/u/0/embed?mid=1KErsEAG_2awDN1bGngBQ_LLRziwiak9d"  width="90%" height="600px"></iframe>
+      <iframe   [ngClass]="{'moveBottom':imageHover}" [style.width]="iFrameWidth+'%'" class="google_map "src="https://www.google.com/maps/d/u/0/embed?mid=1KErsEAG_2awDN1bGngBQ_LLRziwiak9d"   width="90%" height="600px"></iframe>
     
   </div>
   <div [ngClass]="{'backColor':imageHover}" class="img_cont">

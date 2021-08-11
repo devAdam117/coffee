@@ -1,0 +1,195 @@
+.container-fluid{
+
+    margin: 0; 
+    padding: 0;   
+    left: 0;
+    position: relative;
+    top: 0;    
+}
+
+.info_container{       
+    position: absolute;
+    margin: 0 !important;    
+    padding: 0 !important;
+    width: 100% !important;  
+    z-index: -1;
+    top: 25vh;
+}
+.dissapearUp{
+    transform: translateY(-70vh);
+    
+}
+.showFromUp{
+    transform: translateY(0vh);
+}
+
+.back_img{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-origin: center;    
+    background-image: url("/assets/contact.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -20;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+   
+}
+.img_logo{
+    font-family: Marcellus;
+    position: absolute;
+    top: 15vh;    
+    transition: 0.4s;
+    font-size: 3.3rem; 
+
+}
+
+
+.contact_info{ 
+    text-align: left; 
+    width: fit-content;  
+    height: fit-content;  
+    color: black;    
+    z-index: -1;   
+    padding: 0.5rem;
+    background: transparent;
+    box-shadow: 1px 1px 5px rgb(158, 158, 158);
+    font-family: 'STIX Two Text', serif;
+
+}
+.contact_par{
+    font-size: 1.3rem;
+    
+}
+.ask_input{
+    border: 1px solid rgb(94, 93, 93);
+    background-color:rgba(0, 0, 0, 0.24);
+    width: 100% !important;
+    padding: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+    outline: none;
+}
+.news_input{
+    border: 1px solid rgb(94, 93, 93);
+    background-color:rgba(0, 0, 0, 0.24); 
+    width: 80%; 
+    display: block; 
+    padding: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+    outline: none;
+}
+.boxsizingBorder {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.submit_ask_btn{
+    float: right;
+    margin-top: 1rem;
+    border: 2px solid black !important;
+    color: white;
+    background-color: rgba(78, 78, 78, 0.24);
+
+}
+.submit_news_btn{
+    margin-top: 1rem;
+    border: 2px solid black !important;
+    color: white;
+    background-color: rgba(78, 78, 78, 0.486);
+}
+.newsletter_text{
+color: black;
+}
+
+.text_area{    
+    background-color:rgba(0, 0, 0, 0.24);
+    color: white !important;
+    outline: none;  
+    width: 100%;
+    padding:1.3rem;
+}
+
+.contact_tit{
+    font-size: 1.6rem;
+    color: black;    
+}
+.contact_form{       
+    height: fit-content;
+
+}
+
+.cont_form_item{
+    display: block;
+    margin: 0;
+    color: black;
+    
+}
+.newsletter_form{
+    width: 100%;
+    display: flex;
+    padding:1rem;
+    flex-direction:column;
+    align-items: center;
+    box-shadow: 1px 1px 5px rgb(158, 158, 158);    
+    z-index: -1; 
+    margin-bottom: 2rem;  
+
+}
+.contact_links{
+     
+    bottom: 0;   
+    transition: 0.3;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.80);     
+    z-index: -1;  
+    padding: 0;
+    margin: 0;       
+    display: flex;
+    justify-content: center;  
+    
+}
+.showFooter{
+    position: absolute;
+    margin-top: 1rem;
+    bottom: 0;
+}
+.icon_wrapper{    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-between;
+    justify-items: center;
+    list-style: none;
+    text-decoration: none;
+}
+.icon_item {
+    font-size: 1.6rem;
+    margin-top: 1rem;    
+    padding: 0.35rem;
+    transition: 0.3s;    
+}
+.fb_item{
+transform: translateX(-1rem);
+}
+.tw_item{
+    transform: translateY(1rem);
+}
+.ig_item {
+    transform: translateX(1rem);
+}
+.fb {
+    color:rgb(66, 103, 178) ;
+}
+.tw {
+    color:rgb(116, 161,242) !important;
+}
+.ig {
+    color:rgb(225, 48, 108) !important;
+}
+
