@@ -105,7 +105,7 @@ export class GaleriaComponent implements OnInit {
    }
   }
   //key event binding
-  @HostListener('window:keyup',['$event'])
+   @HostListener('window:keyup',['$event'])
   keyEvent(event:KeyboardEvent){
     if(this.bigImg){
      if(event.keyCode===39){
@@ -119,11 +119,8 @@ export class GaleriaComponent implements OnInit {
      }
       
 
-    }
-    else {
-      
-    }
-  }
+    }   
+  } 
   
   hideBigImg(mode){
     if(mode=="diss_mode"){
@@ -156,6 +153,10 @@ export class GaleriaComponent implements OnInit {
     else {      
       this.showBigImg(this.fiteredImages[this.fiteredImages.length-1])
     }
+    setTimeout(()=>{this.centerImg()},1)
+
+    
+
   }
   nextImg(){
     let currImgIndex=this.fiteredImages.indexOf(this.currentImg)
@@ -166,6 +167,9 @@ export class GaleriaComponent implements OnInit {
     else {
       this.showBigImg(this.fiteredImages[0])
     }
+    setTimeout(()=>{this.centerImg()},1)
+
+
 
     
 
@@ -182,24 +186,35 @@ export class GaleriaComponent implements OnInit {
     //only one can be big
     this.allImages.forEach(e=>e.bigSize=false);
     img_obj.bigSize=true;
+    //this.ngAfterViewInit()
+    setTimeout(()=>{this.centerImg()},1)
+    
     
    
 
     // should replace with observable??.
-    setTimeout(()=>{this.centerImg()},1)  ;
+    
     
   }  
  
-  centerImg(){           
-    let containerWidth =this.imgContainer.nativeElement.clientWidth;
-    let bigImgWidth = this.bigImg.nativeElement.clientWidth;
+  centerImg(){  
+    let containerWidth  
+    let bigImgWidth 
+    let containerHeight  
+    if(this.imgContainer){
+      containerWidth=this.imgContainer.nativeElement.clientWidth;
+      bigImgWidth=this.bigImg.nativeElement.clientWidth;
+      containerHeight = this.imgContainer.nativeElement.clientHeight;      
+    }
+          
+     
     let windowWidth =  document.querySelector(".top_img").clientWidth; 
     let windowHeight =  document.querySelector(".top_img").clientHeight; 
-    let containerHeight = this.imgContainer.nativeElement.clientHeight;
+    
     this.topForBigImg=100*(1-(containerHeight/windowHeight))/2;    
-      this.visibilityForBigImg="visible";         
-      this.leftForBigImg= 100*(1-(containerWidth/windowWidth))/2;
-      this.btnLeft=100*((containerWidth-bigImgWidth)/2)/containerWidth;
+    this.visibilityForBigImg="visible";         
+    this.leftForBigImg= 100*(1-(containerWidth/windowWidth))/2;
+    this.btnLeft=100*((containerWidth-bigImgWidth)/2)/containerWidth;
   }
 
   onChipIn(){     
@@ -342,7 +357,7 @@ export class GaleriaComponent implements OnInit {
 
   //resize fncton
   onResize(e,w?,h?){
-    
+    this.centerImg()
     let height
     let width    
     if(e==""){
