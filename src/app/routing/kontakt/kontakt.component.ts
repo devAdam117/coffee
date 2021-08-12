@@ -1,11 +1,15 @@
+import { R } from '@angular/cdk/keycodes';
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { emailValidation } from '../rezervacie/validators';
 
 @Component({
   selector: 'app-kontakt',
   templateUrl: './kontakt.component.html',
   styleUrls: ['./kontakt.component.css']
 })
+
 export class KontaktComponent implements OnInit {
   sideNav = document.querySelector("mat-sidenav-content")
   heightIsBig:boolean
@@ -17,18 +21,73 @@ export class KontaktComponent implements OnInit {
   iconMoveTop:string
   iconMoveLeft:string
   imgHeightOnResize:number
-  constructor() {
+  showContactForm:boolean=true
+  infoMessage:number
+  fallDown:string
+  titleMarginBottom:number
+  subscriptionDone:boolean=false;
+  titleMarginTop:number
+
+  public askForm:FormGroup
+  public newsletterForm:FormGroup
+  constructor(public fb:FormBuilder) {
+    this.askForm=this.fb.group({
+      emailAsk:['',[Validators.required,emailValidation(".",/@/,[".com",".ru",".org",".net",".ir",".in",".uk",".sk",".cz",".au",".ua","de","us"])]],
+      name:['',[Validators.required]],
+      subject:['',Validators.required],
+      text:['',Validators.required]
     
+    })
+    this.newsletterForm=this.fb.group({
+      emailNews:['',[Validators.required,emailValidation(".",/@/,[".com",".ru",".org",".net",".ir",".in",".uk",".sk",".cz",".au",".ua","de","us"])]],
+
+    })
    }
+   sendQuestion(data,form){
+    console.log(data)
+    this.showContactForm=false
+    this.infoMessage=form.clientHeight
+    let totalHight= this.sideNav.scrollHeight
+    let vh = ((this.infoMessage/totalHight)*100)*0.45
+    setTimeout(()=>{
+      this.fallDown=`translateY(${vh}vh)`
+      this.titleMarginBottom=10
+
+    },1)    
+  }
+  showAskForm(){
+    this.showContactForm=true;
+    this.titleMarginBottom=15
+    setTimeout(()=>{
+      this.titleMarginBottom=1
+
+
+    },1)
+  }
     showImg(){
     if(this.mainContainer){
       let mainHeight =this.mainContainer.nativeElement.scrollHeight     
      this.imgHeightOnResize=mainHeight +0.25*this.sideNav.clientHeight     }
    }
+   subscribe(data){
+     console.log(data)
+     this.subscriptionDone=true;
+     setTimeout(()=>{this.subscriptionDone=false;},3700)
+   }
   @ViewChild('footer') footer
    scrolledDown:boolean=false;
   ngOnInit(): void {
-    
+    this.titleMarginTop=0
+    this.titleMarginBottom=15
+    setTimeout(()=>{    
+    this.titleMarginBottom=1
+    this.titleMarginTop=3
+    setTimeout(()=>{
+      this.titleMarginTop=0
+
+    },300)
+
+    },100)    
     setTimeout(()=>{this.showImg()},1)
     //this.textArea.nativeElement.cols=150;
     this.onResize("",window.innerWidth,window.innerHeight)
@@ -61,6 +120,23 @@ export class KontaktComponent implements OnInit {
 
   }
   
+  //get
+  get emailAsk () {
+    return this.askForm.get("emailAsk")
+  }
+  get name () {
+    return this.askForm.get("name")
+  }
+  get subject () {
+    return this.askForm.get("subject")
+  }
+  get text () {
+    return this.askForm.get("text")
+  }
+
+  get emailNews(){
+    return this.newsletterForm.get("emailNews")
+  }
   
     /* let currentHeight = document.querySelector("mat-sidenav-content").scrollTop
     if(currentHeight>0){

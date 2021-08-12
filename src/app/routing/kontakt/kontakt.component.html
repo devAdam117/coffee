@@ -11,24 +11,58 @@
                 <p class="contact_par">Next Coffe <small>since 2021</small></p>
                 <p class="contact_par">Prevádzkovateľ: Tvoj Tatko Records, s.r.o.</p>
             </div>
-            <div class="contact_form mt-3 offset-lg-1 col-lg-5">
+            <div align="center" [style.height]="infoMessage+'px'" *ngIf="!showContactForm" class="success_msg contact_form mt-3 offset-lg-1 col-lg-5">
+                <h2 class="text-success success_ask" [style.transform]="fallDown">Správa bola odoslaná</h2>
+                <button [style.transform]="fallDown" mat-button (click)="showAskForm()" class="next_btn success_ask">Ďalej</button>
+            </div>
+            <div *ngIf="showContactForm" class="contact_form mt-3 offset-lg-1 col-lg-5" #form >
                 
-                <h2 class="cont_form_item">Kontaktný formulár!</h2>
+                <h2 [style.margin-top]="titleMarginTop+'rem'" [style.margin-bottom]="titleMarginBottom+'rem'" class="cont_form_item cont_form_title">Kontaktný formulár!</h2>
                <!--<mat-form-field class="mat_form cont_form_item" appearance="fill" color="accent"> -->                 
-                    <input class="ask_input" #nameInput    placeholder="Zadajte email, kde vám môžeme odpovedať" >
-                    <input class="ask_input" type="text" placeholder="Vaše meno">
-                    <input class="ask_input" type="text" placeholder="Predmet správy">
-                    <textarea #textArea placeholder="Na čo sa chcete opýtať?"  class="cont_form_item text_area textArea"  id=""   rows=20 ></textarea>
-                    <button class="submit_ask_btn" mat-button>Odoslať</button>
+                    <form  class="formAsk" [formGroup]="askForm">
+                        
+                        
+                        <input formControlName="emailAsk" class="ask_input" placeholder="Zadajte email, kde vám môžeme odpovedať" >
+                        <div class="text-danger error_msg" *ngIf="emailAsk?.touched && emailAsk?.errors ">                
+                            <ng-container
+                            *ngIf="emailAsk?.errors?.required; then emptyDOM; else validate">
+                          </ng-container>
+                          <ng-template #emptyDOM>
+                            <div>
+                              * Mail je povinný údaj
+                            </div>
+                          </ng-template>
+                          <ng-template #validate>
+                            <div  *ngIf ="emailAsk?.errors?.emailError">
+                              * Neplatný formát mailu
+                            </div>
+                          </ng-template>                          
+                        </div>
+                        
+                        <input formControlName="name" class="ask_input" type="text" placeholder="Vaše meno">
+                        <div class="text-danger error_msg" *ngIf="name?.touched && name?.errors?.required">* Zadajte prosím vaše meno</div>
+
+
+                        <input formControlName="subject"  class="ask_input" type="text" placeholder="Predmet správy">
+                        <div class="text-danger error_msg" *ngIf="subject?.touched && subject?.errors?.required">* Zadajte prosím predmet správy</div>
+
+                        
+                        <textarea formControlName="text" #textArea placeholder="Na čo sa chcete opýtať?"  class="cont_form_item text_area textArea"  id=""   rows=20 ></textarea>
+                        <div class="text-danger error_msg " *ngIf="text?.touched && text?.errors?.required">* Zadájte správu, na ktorú sa chcete opýtať.</div>
+
+                        <button (click)="sendQuestion(this.askForm.value,form)" [disabled]=!askForm.valid class="submit_ask_btn" mat-button>Odoslať</button>
+                    </form>
                   <!-- </mat-form-field>     --> 
             </div>
             <div class="newsletter_form mt-3 col-12 ">
                 <h2 class="newsletter_text">Chcete dostávať automaticky najnovšie akcie, zľavy, nové produkty a podobne?</h2>
                 <p class="newsletter_text">Prihláste sa na odber našého newsletteru</p>
                 <!--<mat-form-field class="mat_form cont_form_item" appearance="fill" color="accent"> --> 
-                    <input class="news_input" type="text" placeholder="Zadajte mail, na ktorý vám budú automatický chodiť novinky">
-                    <button class="submit_news_btn" mat-button>Odoberať</button>
-    
+                <form class="formNews" [formGroup]="newsletterForm">
+                    <input formControlName="emailNews" class="news_input" type="text" placeholder="Zadajte mail, na ktorý vám budú automatický chodiť novinky">
+                     <p *ngIf="subscriptionDone" class="mt-2 text-success success_item">Ďakujeme :)</p>                    
+                    <button (click)="subscribe(this.newsletterForm.value)"  [disabled]=!newsletterForm.valid class="submit_news_btn" mat-button>Odoberať</button>
+                </form>
                 <!-- </mat-form-field>     --> 
             </div>
             <div #footer [style.bottom]=0  class="contact_links col-12">

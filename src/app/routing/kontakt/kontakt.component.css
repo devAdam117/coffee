@@ -5,6 +5,7 @@
     width: 100% !important; 
     position: relative;      
     top: 0vh;   
+    
      
 }
 .test{
@@ -19,6 +20,15 @@
     width: 100% !important;  
     z-index: -1;
     top: 25vh;
+    
+}
+.formAsk {
+    width: 100%;
+    text-align: left;  
+    transition: 0.3s;  
+}
+.formNews {
+    width: 100%;
 }
 .dissapearUp{
     transform: translateY(-70vh);
@@ -44,6 +54,9 @@
     justify-content: center;  
    
 }
+.success_ask {
+    font-family: Marcellus;
+}
 .img_logo{
     font-family: Marcellus;
     position: absolute;
@@ -55,6 +68,7 @@
 
 
 .contact_info{ 
+    
     text-align: left; 
     width: fit-content;  
     height: fit-content;  
@@ -75,9 +89,12 @@
     background-color:rgba(0, 0, 0, 0.24);
     width: 100% !important;
     padding: 1rem;
-    color: white;
-    margin-bottom: 1rem;
+    color: white;   
     outline: none;
+    margin-bottom: 0.35rem;
+}
+.error_msg {
+    margin-bottom: 1rem;
 }
 .news_input{
     border: 1px solid rgb(94, 93, 93);
@@ -86,6 +103,7 @@
     display: block; 
     padding: 1rem;
     color: white;
+    margin: 0 auto;
     margin-bottom: 1rem;
     outline: none;
 }
@@ -102,14 +120,23 @@
     background-color: rgba(78, 78, 78, 0.24);
 
 }
+
+.next_btn{
+    border: 2px solid black !important;
+    color: white;
+    background-color: rgba(78, 78, 78, 0.24);
+}
 .submit_news_btn{
     margin-top: 1rem;
+    transition: 0.3s;
     border: 2px solid black !important;
     color: white;
     background-color: rgba(78, 78, 78, 0.486);
 }
 .newsletter_text{
-color: black;
+    font-family: Marcellus;
+    font-size: 1.35rem;
+    color: black;
 }
 
 .text_area{    
@@ -120,6 +147,31 @@ color: black;
     font-size: 1rem !important;
     padding:1.3rem;
 }
+.cont_form_title{
+    font-family: Marcellus;
+    transition: 0.5s;
+}
+.success_msg{   
+    position: relative; 
+    text-align: center;    
+    transition: 0.3s;      
+    
+}
+.success_msg h2 {
+    
+    font-size: 2.0rem;
+    margin-bottom: 0.35rem;  
+    transition: 0.3s;   
+
+}
+.success_msg button {
+    
+    font-size: 1.3rem;
+    transition: 0.3s;
+    top: 0;    
+    padding:0 1rem;       
+}
+
 
 .contact_tit{
     font-size: 1.6rem;
@@ -144,10 +196,14 @@ color: black;
     padding:1rem;
     flex-direction:column;
     align-items: center;
+    background-color: rgba(115, 169, 212, 0.46);
     box-shadow: 1px 1px 5px rgb(158, 158, 158);    
     z-index: -1; 
     margin-bottom: 2rem;  
 
+}
+.newsletter_form input::placeholder {
+    color: white;
 }
 .contact_links{ 
     margin-bottom: auto;    
@@ -159,6 +215,7 @@ color: black;
     margin: 0;       
     display: flex;
     justify-content: center;  
+    
     
 }
 .showFooter{
@@ -200,3 +257,13 @@ transform: translateX(-1rem);
     color:rgb(225, 48, 108) !important;
 }
 
+@keyframes moveRight {
+    0%   { transform:translateX(-100%); }
+    15% { transform:translateX(0%);}
+    85% { transform:translateX(0%);}     
+    100% { transform:translateX(100%);  }
+  }
+  .success_item{       
+      animation: moveRight 4s linear 1 ;       
+      animation: name duration timing-function delay iteration-count direction fill-mode; 
+      }
