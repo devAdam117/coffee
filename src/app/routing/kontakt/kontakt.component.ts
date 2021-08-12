@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
@@ -15,18 +16,25 @@ export class KontaktComponent implements OnInit {
   iconMoveRight:string
   iconMoveTop:string
   iconMoveLeft:string
+  imgHeightOnResize:number
   constructor() {
     
    }
-  
+    showImg(){
+    if(this.mainContainer){
+      let mainHeight =this.mainContainer.nativeElement.scrollHeight     
+     this.imgHeightOnResize=mainHeight +0.25*this.sideNav.clientHeight     }
+   }
+  @ViewChild('footer') footer
    scrolledDown:boolean=false;
   ngOnInit(): void {
     
+    setTimeout(()=>{this.showImg()},1)
     //this.textArea.nativeElement.cols=150;
     this.onResize("",window.innerWidth,window.innerHeight)
     this.sideNav.clientHeight>=703 ? this.heightIsBig=true:this.heightIsBig=false
     this.sideNav.addEventListener('scroll',()=>{
-      
+      this.onResize("",window.innerWidth,window.innerHeight)
       if(this.sideNav.scrollTop>0){
         
         this.scrolledDown=true
@@ -62,8 +70,11 @@ export class KontaktComponent implements OnInit {
       this.scrolledDown=false;
     } */
     
-  
+  @ViewChild('infoCont') mainContainer
   onResize(e,w?,h?){
+    this.showImg()
+   
+    
     this.sideNav.clientHeight>=703 ? this.heightIsBig=true:this.heightIsBig=false
     let height
     let width    
