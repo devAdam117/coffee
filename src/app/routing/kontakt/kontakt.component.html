@@ -19,10 +19,10 @@
                 
                 <h2 [style.margin-top]="titleMarginTop+'rem'" [style.margin-bottom]="titleMarginBottom+'rem'" class="cont_form_item cont_form_title">Kontaktný formulár!</h2>
                <!--<mat-form-field class="mat_form cont_form_item" appearance="fill" color="accent"> -->                 
-                    <form  class="formAsk" [formGroup]="askForm">
+                    <form name="contact" method="POST" data-netlify="true"  class="formAsk" [formGroup]="askForm">
                         
                         
-                        <input formControlName="emailAsk" class="ask_input" placeholder="Zadajte email, kde vám môžeme odpovedať" >
+                        <input name="emailQues" formControlName="emailAsk" class="ask_input" placeholder="Zadajte email, kde vám môžeme odpovedať" >
                         <div class="text-danger error_msg" *ngIf="emailAsk?.touched && emailAsk?.errors ">                
                             <ng-container
                             *ngIf="emailAsk?.errors?.required; then emptyDOM; else validate">
@@ -39,29 +39,29 @@
                           </ng-template>                          
                         </div>
                         
-                        <input formControlName="name" class="ask_input" type="text" placeholder="Vaše meno">
+                        <input name="name" formControlName="name" class="ask_input" type="text" placeholder="Vaše meno">
                         <div class="text-danger error_msg" *ngIf="name?.touched && name?.errors?.required">* Zadajte prosím vaše meno</div>
 
 
-                        <input formControlName="subject"  class="ask_input" type="text" placeholder="Predmet správy">
+                        <input name="subject" formControlName="subject"  class="ask_input" type="text" placeholder="Predmet správy">
                         <div class="text-danger error_msg" *ngIf="subject?.touched && subject?.errors?.required">* Zadajte prosím predmet správy</div>
 
                         
-                        <textarea formControlName="text" #textArea placeholder="Na čo sa chcete opýtať?"  class="cont_form_item text_area textArea"  id=""   rows=20 ></textarea>
+                        <textarea name="text" formControlName="text" #textArea placeholder="Na čo sa chcete opýtať?"  class="cont_form_item text_area textArea"  id=""   rows=20 ></textarea>
                         <div class="text-danger error_msg " *ngIf="text?.touched && text?.errors?.required">* Zadájte správu, na ktorú sa chcete opýtať.</div>
 
-                        <button (click)="sendQuestion(this.askForm.value,form)" [disabled]=!askForm.valid class="submit_ask_btn" mat-button>Odoslať</button>
-                    </form>
+                        <button type="submit" (click)="sendQuestion(this.askForm.value,form)" [disabled]=!askForm.valid class="submit_ask_btn" mat-button>Odoslať</button>
+                    </form >
                   <!-- </mat-form-field>     --> 
             </div>
             <div class="newsletter_form mt-3 col-12 ">
                 <h2 class="newsletter_text">Chcete dostávať automaticky najnovšie akcie, zľavy, nové produkty a podobne?</h2>
                 <p class="newsletter_text">Prihláste sa na odber našého newsletteru</p>
                 <!--<mat-form-field class="mat_form cont_form_item" appearance="fill" color="accent"> --> 
-                <form class="formNews" [formGroup]="newsletterForm">
-                    <input formControlName="emailNews" class="news_input" type="text" placeholder="Zadajte mail, na ktorý vám budú automatický chodiť novinky">
+                <form name="newsletter" method="POST" data-netlify="true" class="formNews" [formGroup]="newsletterForm">
+                    <input name="email" formControlName="emailNews" class="news_input" type="text" placeholder="Zadajte mail, na ktorý vám budú automatický chodiť novinky">
                      <p *ngIf="subscriptionDone" class="mt-2 text-success success_item">Ďakujeme :)</p>                    
-                    <button (click)="subscribe(this.newsletterForm.value)"  [disabled]=!newsletterForm.valid class="submit_news_btn" mat-button>Odoberať</button>
+                    <button type="submit" (click)="subscribe(this.newsletterForm.value)"  [disabled]=!newsletterForm.valid class="submit_news_btn" mat-button>Odoberať</button>
                 </form>
                 <!-- </mat-form-field>     --> 
             </div>
